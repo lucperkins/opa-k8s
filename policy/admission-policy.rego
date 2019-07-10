@@ -1,7 +1,5 @@
 package kubernetes.admission
 
-import data.helpers
-
 request = input.request
 kind = request.kind.kind
 image = request.object.spec.containers[_].image
