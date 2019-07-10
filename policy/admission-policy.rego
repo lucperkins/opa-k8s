@@ -1,5 +1,7 @@
+# make apply-policy
 package kubernetes.admission
 
+# Convenience variables (collapses JSON input)
 request = input.request
 kind = request.kind.kind
 image = request.object.spec.containers[_].image
@@ -19,12 +21,13 @@ deny[msg] {
 # Local development environment only
 is_local_env(username) {
     username == "minikube-user"
+    endswith(image, "dev")
 }
 
 deny[msg] {
     not is_local_env(request.userInfo.username)
 
-    msg := "This operation is possibly only on Minikube"
+    msg := "This operation is allowed only on Minikube"
 }
 
 # No forbidden namespaces
