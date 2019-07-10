@@ -37,9 +37,17 @@ deny[msg] {
 # make forbidden-namespace
 
 # No new namespaces
-deny[msg] {
+is_namespace(kind) {
     kind == "Namespace"
-    operation == "CREATE"
+}
+
+is_create_operation(op) {
+    op == "CREATE"
+}
+
+deny[msg] {
+    is_namespace(kind)
+    is_create_operation(operation)
     msg := "New namespaces are not allowed"
 }
 # make bad-namespace
@@ -52,9 +60,14 @@ deny[msg] {
 # make latest-image
 
 # No new resources in OPA's namespace
+in_opa_namespace(ns) {
+    ns == "opa"
+}
+
 deny[msg] {
-    operation == "CREATE"
-    namespace == "opa"
+    is_create_operation(operation)
+    in_opa_namespace(namespace)
+
     msg := "No new resources in the 'opa' namespace"
 }
 # make opa-namespace-resource
@@ -63,6 +76,7 @@ deny[msg] {
 deny[msg] {
     startswith(image, "evilcorp.io")
     not startswith(image, "gcr.io")
+
     msg := "Images from evilcorp.io cannot be used; must come from GCR"
 }
 # make bad-registry
@@ -94,6 +108,7 @@ deny[msg] {
     is_pod_security_policy(kind)
     spec.privileged == true
 
-    msg := sprintf("%v", [containers[_].securityContext.runAsUser])
+    msg := "Privileged Pods now allowed"
 }
 # make privileged-pods
+# make non-privileged-pods

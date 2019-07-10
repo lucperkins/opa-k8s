@@ -76,3 +76,6 @@ no-privilege-escalation:
 
 privileged-pods:
 	kubectl apply -f k8s/privileged-pods.yaml
+
+non-privileged-pods:
+	kubectl apply -f k8s/non-privileged-pods.yaml

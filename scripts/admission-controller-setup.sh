@@ -1,6 +1,8 @@
 #!/bin/bash
 
-CA_BUNDLE=$(cat certs/ca.crt | base64 | tr -d '\n')
+# Certs
+CA_CERT=certs/ca.crt
+CA_BUNDLE=$(cat $(CA_CERT) | base64 | tr -d '\n')
 WEBHOOK_CONFIG=k8s/webhook-configuration.yaml
 
 kubectl create namespace opa

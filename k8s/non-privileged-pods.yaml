@@ -1,9 +1,9 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: privileged
+  name: non-privileged
 spec:
-  privileged: true
+  privileged: false
   seLinux:
     rule: 'RunAsAny'
   runAsUser:
