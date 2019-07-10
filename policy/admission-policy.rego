@@ -108,7 +108,7 @@ deny[msg] {
     is_pod_security_policy(kind)
     spec.privileged == true
 
-    msg := "Privileged Pods now allowed"
+    msg := "Privileged Pods not allowed"
 }
 # make privileged-pods
 # make non-privileged-pods
