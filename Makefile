@@ -34,7 +34,7 @@ forbidden-namespace:
 		--generator=run-pod/v1 \
 		--image=nginx:latest
 
-bad-namespace:
+new-namespace:
 	kubectl create namespace new-one
 
 latest-image:

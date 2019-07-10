@@ -21,7 +21,6 @@ deny[msg] {
 # Local development environment only
 is_local_env(username) {
     username == "minikube-user"
-    endswith(image, "dev")
 }
 
 deny[msg] {
@@ -51,7 +50,7 @@ deny[msg] {
     is_create_operation(operation)
     msg := "New namespaces are not allowed"
 }
-# make bad-namespace
+# make new-namespace
 
 # No "latest" images
 deny[msg] {
@@ -113,3 +112,5 @@ deny[msg] {
 }
 # make privileged-pods
 # make non-privileged-pods
+
+# COMMENTS
