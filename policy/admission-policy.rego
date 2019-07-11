@@ -18,21 +18,10 @@ deny[msg] {
     msg := sprintf("API version %s is deprecated", [request.options.apiVersion])
 }
 
-# Local development environment only
-is_local_env(username) {
-    username == "minikube-user"
-}
-
-deny[msg] {
-    not is_local_env(request.userInfo.username)
-
-    msg := "This operation is allowed only on Minikube"
-}
-
 # No forbidden namespaces
 deny[msg] {
     namespace == "super-duper-secure"
-    msg := "Cannot perform *any* operations re: the super-duper-secure namespace"
+    msg := "Cannot perform *any* operations in the super-duper-secure namespace"
 }
 # make forbidden-namespace
 
